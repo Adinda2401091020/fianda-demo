@@ -1,197 +1,1205 @@
 <!doctype html>
 <html lang="id">
+
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>Fianda — Coffee Roastery & Eatery</title>
-<meta name="description" content="Concept website demo for Fianda Coffee Roastery & Eatery, Payakumbuh."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<style>
-:root{--bg:#100d09;--cream:#f7f0e4;--muted:#b7aa98;--line:rgba(247,240,228,.14);--accent:#c58b52;--gold:#e2b57d;--dark:#18120c;--serif:'Playfair Display',Georgia,serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--bg);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px)}
-a{color:inherit;text-decoration:none}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
-.noise{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-/* intro */
-#pre{position:fixed;inset:0;z-index:100;background:#0b0906;display:grid;place-items:center;text-align:center}
-#pre .w{font:600 clamp(40px,8vw,90px)/1 var(--serif);letter-spacing:.14em;overflow:hidden}#pre .w span{display:inline-block;transform:translateY(110%)}
-#pre .c{margin-top:18px;font-size:12px;letter-spacing:.3em;color:var(--accent);font-variant-numeric:tabular-nums}
-#bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;background:linear-gradient(90deg,var(--accent),var(--gold));transform:scaleX(0);transform-origin:0 50%}
-.cur{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;border:1px solid rgba(226,181,125,.7);border-radius:50%;z-index:90;pointer-events:none;transition:width .3s,height .3s,margin .3s,background .3s}
-.cur.big{width:78px;height:78px;margin:-39px 0 0 -39px;background:rgba(226,181,125,.12)}
-nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:22px 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s,padding .4s,transform .5s cubic-bezier(.2,.7,.2,1)}
-nav.solid{background:rgba(16,13,9,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:14px 5vw;border-bottom:1px solid var(--line)}nav.hide{transform:translateY(-110%)}
-.brand{font:600 24px var(--serif);letter-spacing:.14em}.navlinks{display:flex;gap:32px;font-size:12px;letter-spacing:.13em;text-transform:uppercase}
-.navlinks a{position:relative;opacity:.78;transition:.3s}.navlinks a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}.navlinks a:hover{opacity:1}.navlinks a:hover:after{transform:scaleX(1)}
-/* hero */
-.hero{min-height:100svh;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 72% 42%,#4a3220 0,#1a130d 38%,#100d09 72%)}
-#scene{position:absolute;inset:0;width:100%;height:100%}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,13,9,.9) 0%,rgba(16,13,9,.4) 50%,rgba(16,13,9,0) 100%),linear-gradient(0deg,var(--bg),transparent 18%);pointer-events:none}
-.hero-content{position:relative;z-index:2;width:min(1200px,90vw);padding-top:8vh}
-.hero h1{font:600 clamp(60px,10.5vw,158px)/.9 var(--serif);letter-spacing:-.055em;margin:0}.ln{display:block;overflow:hidden;padding:.06em 0 .12em;margin-bottom:-.1em}.ln>span{display:block}
-.hero h1 .it{font-style:italic;font-weight:500;background:linear-gradient(100deg,#d6b58c 20%,#fff1d8 50%,#c58b52 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s ease-in-out infinite}
-@keyframes sheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
-.hero p{max-width:460px;color:var(--muted);line-height:1.8;margin:30px 0}
-.eyebrow,.kicker{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 24px;border:1px solid rgba(247,240,228,.28);font-size:12px;letter-spacing:.12em;text-transform:uppercase;position:relative;overflow:hidden;isolation:isolate;transition:color .5s,border-color .5s}
-.btn:before{content:"";position:absolute;inset:0;background:var(--cream);transform:translateY(101%);transition:transform .55s cubic-bezier(.2,.7,.2,1);z-index:-1}.btn:hover{color:var(--dark);border-color:var(--cream)}.btn:hover:before{transform:none}
-.scroll{position:absolute;z-index:3;bottom:28px;left:5vw;display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.scroll i{width:1px;height:46px;background:var(--line);position:relative;overflow:hidden}.scroll i:after{content:"";position:absolute;left:0;top:0;width:1px;height:50%;background:var(--gold);animation:drip 2.2s ease-in-out infinite}@keyframes drip{from{transform:translateY(-100%)}to{transform:translateY(200%)}}
-/* marquee */
-.mq{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:26px 0;background:#120e0a}
-.mq div{display:inline-flex;gap:50px;animation:mq 38s linear infinite;font:500 clamp(34px,5vw,64px)/1 var(--serif);font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(226,181,125,.55)}.mq b{font-style:normal;-webkit-text-stroke:0;color:var(--accent);font-weight:400}
-@keyframes mq{to{transform:translateX(-50%)}}
-section{padding:140px 5vw}.wrap{width:min(1200px,90vw);margin:auto}.split{display:grid;grid-template-columns:1fr 1.2fr;gap:9vw;align-items:center}
-.display{font:600 clamp(42px,6vw,82px)/1 var(--serif);letter-spacing:-.04em;margin:0 0 28px}.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}.w>i{display:inline-block;font-style:inherit}
-.body{color:var(--muted);line-height:1.9;max-width:590px}
-.story-card{position:relative;min-height:540px;border:1px solid var(--line);overflow:hidden;background:radial-gradient(circle at 50% 40%,#4a3322,#17110d 70%)}
-.story-card .grain{position:absolute;width:180px;height:260px;border-radius:50%;background:radial-gradient(ellipse at 35% 35%,#c08040 0 3%,#7a4725 22%,#27150c 70%);filter:drop-shadow(0 24px 30px #000);box-shadow:inset -20px -15px 30px rgba(0,0,0,.55),inset 10px 5px 15px rgba(255,220,160,.1)}
-.grain:after{content:"";position:absolute;left:50%;top:6%;bottom:6%;width:5px;margin-left:-2px;border-radius:5px;background:#170b05;transform:skewX(-8deg);box-shadow:1px 0 0 rgba(255,220,160,.08)}
-.g1{left:16%;top:12%;transform:rotate(-25deg)}.g2{right:14%;top:30%;transform:rotate(30deg) scale(.75)}.g3{left:40%;bottom:6%;transform:rotate(7deg) scale(.55)}
-.story-card .stamp{position:absolute;bottom:26px;left:28px;font:600 52px var(--serif);color:rgba(247,240,228,.2)}
-.timeline{margin-top:70px;position:relative;padding-left:34px}.tl{position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line)}.tl i{position:absolute;inset:0;background:linear-gradient(var(--gold),var(--accent));transform:scaleY(0);transform-origin:top}
-.event{display:grid;grid-template-columns:130px 1fr;gap:35px;padding:34px 0;border-bottom:1px solid var(--line);position:relative}.event:before{content:"";position:absolute;left:-38px;top:46px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--gold)}
-.year{font:600 32px var(--serif);color:var(--accent)}.event h3{margin:0 0 8px;font:500 26px var(--serif)}.event p{margin:0;color:var(--muted);line-height:1.8}
-/* roast */
-.roast{background:#120d09;overflow:hidden}
-.roast-visual{height:640px;position:relative;border:1px solid var(--line);background:radial-gradient(circle at 50% 38%,#5d3b22,#150f0b 62%);--h:0;overflow:hidden}
-.ring{position:absolute;border:1px solid rgba(247,240,228,.12);border-radius:50%;inset:8% 18% 34%;animation:spin 24s linear infinite}.ring.r2{inset:15% 25% 40%;animation-duration:16s;animation-direction:reverse;border-style:dashed;border-color:rgba(197,139,82,.3)}
-.roaster{position:absolute;left:50%;top:32%;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d28a45,#5a3219 48%,#160d08 72%);box-shadow:0 30px 70px #000,inset -20px -20px 30px rgba(0,0,0,.5),0 0 calc(var(--h)*110px) calc(var(--h)*14px) rgba(226,120,50,calc(var(--h)*.5))}
-.roaster:after{content:"FIANDA";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;letter-spacing:.3em;color:#f0d6b3}
-.steam{position:absolute;width:2px;height:140px;left:50%;top:6%;background:linear-gradient(transparent,rgba(247,240,228,.35),transparent);filter:blur(5px);animation:steam 4s ease-in-out infinite}.s2{left:55%;animation-delay:1.3s;height:100px}.s3{left:45%;animation-delay:2.2s;height:170px}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes steam{0%,100%{transform:translateY(25px) scaleX(1);opacity:0}50%{transform:translateY(-20px) scaleX(4);opacity:.5}}
-.panel{position:absolute;left:0;right:0;bottom:0;padding:22px 28px 26px;background:linear-gradient(transparent,rgba(12,9,6,.9) 30%)}
-.read{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.temp{font:600 54px/1 var(--serif);font-variant-numeric:tabular-nums}.temp small{font-size:20px;color:var(--accent)}.stage{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.panel svg{width:100%;height:120px;display:block;overflow:visible}.panel path{fill:none;stroke-width:2;stroke-linecap:round}.panel .base{stroke:var(--line)}.panel .live{stroke:var(--gold);filter:drop-shadow(0 0 6px rgba(226,181,125,.6))}
-/* menu */
-.menu{background:#e8dfd0;color:#19130d}.menu .body{color:#62584c}.menu .kicker{color:#8a5f35}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#b9ac99;margin-top:60px;border:1px solid #b9ac99}
-.dish{background:#e8dfd0;padding:32px;min-height:290px;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.dish:before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--x,50%) var(--y,50%),rgba(197,139,82,.3),transparent 60%),#f7f0e4;opacity:0;transition:opacity .4s}.dish:hover:before{opacity:1}.dish>*{position:relative}
-.dish .num{font-size:11px;color:#9a7148;letter-spacing:.1em}.dish h3{font:600 30px var(--serif);margin:auto 0 10px;padding-top:50px}.dish p{font-size:14px;color:#756a5d;line-height:1.6;margin:0 0 24px}
-.price{font-size:11px;letter-spacing:.1em;padding-top:14px;border-top:1px solid #c9bba6}
-/* place */
-.place{min-height:760px;background:linear-gradient(#1d1710,#100d09);display:grid;align-items:end;position:relative;overflow:hidden}
-.fields{position:absolute;inset:0;pointer-events:none}.fields svg{position:absolute;left:0;width:100%;height:60%;bottom:0}
-.sun{position:absolute;right:14%;top:12%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,170,90,.5),rgba(240,170,90,0) 68%);filter:blur(6px)}
-.place .wrap{position:relative;z-index:2}.place-info{display:flex;justify-content:space-between;align-items:end;gap:40px}.place h2{max-width:650px}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:25px;min-width:380px}.meta div{border-top:1px solid var(--line);padding-top:13px;font-size:13px;color:var(--muted);line-height:1.6}.meta strong{display:block;color:var(--cream);font-weight:500;margin-bottom:5px}
-footer{padding:70px 5vw 40px;border-top:1px solid var(--line);overflow:hidden}.frow{display:flex;justify-content:space-between;align-items:center;gap:30px;color:var(--muted);font-size:12px;flex-wrap:wrap;padding-bottom:50px}
-.mega{font:600 clamp(70px,22vw,330px)/.8 var(--serif);letter-spacing:-.04em;text-align:center;background:linear-gradient(180deg,rgba(226,181,125,.5),rgba(226,181,125,0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
-@media(max-width:800px){.navlinks,.cur{display:none}.split{grid-template-columns:1fr;gap:50px}.story-card{min-height:420px}.menu-grid{grid-template-columns:1fr}.dish{min-height:230px}.place-info{flex-direction:column;align-items:flex-start}.meta{min-width:0;width:100%}.event{grid-template-columns:78px 1fr;gap:20px}section{padding:90px 5vw}.roast-visual{height:580px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#pre{display:none}}
-</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Fianda — Coffee Roastery & Eatery</title>
+    <meta name="description" content="Concept website demo for Fianda Coffee Roastery & Eatery, Payakumbuh." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg: #100d09;
+            --cream: #f7f0e4;
+            --muted: #b7aa98;
+            --line: rgba(247, 240, 228, .14);
+            --accent: #c58b52;
+            --gold: #e2b57d;
+            --dark: #18120c;
+            --serif: 'Playfair Display', Georgia, serif
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--cream);
+            font-family: 'DM Sans', system-ui, sans-serif;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            opacity: .04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+        }
+
+        /* intro */
+        #pre {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #0b0906;
+            display: grid;
+            place-items: center;
+            text-align: center
+        }
+
+        #pre .w {
+            font: 600 clamp(40px, 8vw, 90px)/1 var(--serif);
+            letter-spacing: .14em;
+            overflow: hidden
+        }
+
+        #pre .w span {
+            display: inline-block;
+            transform: translateY(110%)
+        }
+
+        #pre .c {
+            margin-top: 18px;
+            font-size: 12px;
+            letter-spacing: .3em;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums
+        }
+
+        #bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            z-index: 70;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transform: scaleX(0);
+            transform-origin: 0 50%
+        }
+
+        .cur {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            margin: -19px 0 0 -19px;
+            border: 1px solid rgba(226, 181, 125, .7);
+            border-radius: 50%;
+            z-index: 90;
+            pointer-events: none;
+            transition: width .3s, height .3s, margin .3s, background .3s
+        }
+
+        .cur.big {
+            width: 78px;
+            height: 78px;
+            margin: -39px 0 0 -39px;
+            background: rgba(226, 181, 125, .12)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 30;
+            padding: 22px 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background .4s, padding .4s, transform .5s cubic-bezier(.2, .7, .2, 1)
+        }
+
+        nav.solid {
+            background: rgba(16, 13, 9, .72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 14px 5vw;
+            border-bottom: 1px solid var(--line)
+        }
+
+        nav.hide {
+            transform: translateY(-110%)
+        }
+
+        .brand {
+            font: 600 24px var(--serif);
+            letter-spacing: .14em
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 32px;
+            font-size: 12px;
+            letter-spacing: .13em;
+            text-transform: uppercase
+        }
+
+        .navlinks a {
+            position: relative;
+            opacity: .78;
+            transition: .3s
+        }
+
+        .navlinks a:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .navlinks a:hover {
+            opacity: 1
+        }
+
+        .navlinks a:hover:after {
+            transform: scaleX(1)
+        }
+
+        /* hero */
+        .hero {
+            min-height: 100svh;
+            position: relative;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at 72% 42%, #4a3220 0, #1a130d 38%, #100d09 72%)
+        }
+
+        #scene {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(16, 13, 9, .9) 0%, rgba(16, 13, 9, .4) 50%, rgba(16, 13, 9, 0) 100%), linear-gradient(0deg, var(--bg), transparent 18%);
+            pointer-events: none
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(1200px, 90vw);
+            padding-top: 8vh
+        }
+
+        .hero h1 {
+            font: 600 clamp(60px, 10.5vw, 158px)/.9 var(--serif);
+            letter-spacing: -.055em;
+            margin: 0
+        }
+
+        .ln {
+            display: block;
+            overflow: hidden;
+            padding: .06em 0 .12em;
+            margin-bottom: -.1em
+        }
+
+        .ln>span {
+            display: block
+        }
+
+        .hero h1 .it {
+            font-style: italic;
+            font-weight: 500;
+            background: linear-gradient(100deg, #d6b58c 20%, #fff1d8 50%, #c58b52 80%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: sheen 6s ease-in-out infinite
+        }
+
+        @keyframes sheen {
+
+            0%,
+            100% {
+                background-position: 100% 0
+            }
+
+            50% {
+                background-position: 0 0
+            }
+        }
+
+        .hero p {
+            max-width: 460px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin: 30px 0
+        }
+
+        .eyebrow,
+        .kicker {
+            font-size: 11px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border: 1px solid rgba(247, 240, 228, .28);
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            transition: color .5s, border-color .5s
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--cream);
+            transform: translateY(101%);
+            transition: transform .55s cubic-bezier(.2, .7, .2, 1);
+            z-index: -1
+        }
+
+        .btn:hover {
+            color: var(--dark);
+            border-color: var(--cream)
+        }
+
+        .btn:hover:before {
+            transform: none
+        }
+
+        .scroll {
+            position: absolute;
+            z-index: 3;
+            bottom: 28px;
+            left: 5vw;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .scroll i {
+            width: 1px;
+            height: 46px;
+            background: var(--line);
+            position: relative;
+            overflow: hidden
+        }
+
+        .scroll i:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 50%;
+            background: var(--gold);
+            animation: drip 2.2s ease-in-out infinite
+        }
+
+        @keyframes drip {
+            from {
+                transform: translateY(-100%)
+            }
+
+            to {
+                transform: translateY(200%)
+            }
+        }
+
+        /* marquee */
+        .mq {
+            border-block: 1px solid var(--line);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 26px 0;
+            background: #120e0a
+        }
+
+        .mq div {
+            display: inline-flex;
+            gap: 50px;
+            animation: mq 38s linear infinite;
+            font: 500 clamp(34px, 5vw, 64px)/1 var(--serif);
+            font-style: italic;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(226, 181, 125, .55)
+        }
+
+        .mq b {
+            font-style: normal;
+            -webkit-text-stroke: 0;
+            color: var(--accent);
+            font-weight: 400
+        }
+
+        @keyframes mq {
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        section {
+            padding: 140px 5vw
+        }
+
+        .wrap {
+            width: min(1200px, 90vw);
+            margin: auto
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 9vw;
+            align-items: center
+        }
+
+        .display {
+            font: 600 clamp(42px, 6vw, 82px)/1 var(--serif);
+            letter-spacing: -.04em;
+            margin: 0 0 28px
+        }
+
+        .w {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            padding-bottom: .12em;
+            margin-bottom: -.12em
+        }
+
+        .w>i {
+            display: inline-block;
+            font-style: inherit
+        }
+
+        .body {
+            color: var(--muted);
+            line-height: 1.9;
+            max-width: 590px
+        }
+
+        .story-card {
+            position: relative;
+            min-height: 540px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 40%, #4a3322, #17110d 70%)
+        }
+
+        .story-card .grain {
+            position: absolute;
+            width: 180px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at 35% 35%, #c08040 0 3%, #7a4725 22%, #27150c 70%);
+            filter: drop-shadow(0 24px 30px #000);
+            box-shadow: inset -20px -15px 30px rgba(0, 0, 0, .55), inset 10px 5px 15px rgba(255, 220, 160, .1)
+        }
+
+        .grain:after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 6%;
+            bottom: 6%;
+            width: 5px;
+            margin-left: -2px;
+            border-radius: 5px;
+            background: #170b05;
+            transform: skewX(-8deg);
+            box-shadow: 1px 0 0 rgba(255, 220, 160, .08)
+        }
+
+        .g1 {
+            left: 16%;
+            top: 12%;
+            transform: rotate(-25deg)
+        }
+
+        .g2 {
+            right: 14%;
+            top: 30%;
+            transform: rotate(30deg) scale(.75)
+        }
+
+        .g3 {
+            left: 40%;
+            bottom: 6%;
+            transform: rotate(7deg) scale(.55)
+        }
+
+        .story-card .stamp {
+            position: absolute;
+            bottom: 26px;
+            left: 28px;
+            font: 600 52px var(--serif);
+            color: rgba(247, 240, 228, .2)
+        }
+
+        .timeline {
+            margin-top: 70px;
+            position: relative;
+            padding-left: 34px
+        }
+
+        .tl {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--line)
+        }
+
+        .tl i {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(var(--gold), var(--accent));
+            transform: scaleY(0);
+            transform-origin: top
+        }
+
+        .event {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 35px;
+            padding: 34px 0;
+            border-bottom: 1px solid var(--line);
+            position: relative
+        }
+
+        .event:before {
+            content: "";
+            position: absolute;
+            left: -38px;
+            top: 46px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--gold)
+        }
+
+        .year {
+            font: 600 32px var(--serif);
+            color: var(--accent)
+        }
+
+        .event h3 {
+            margin: 0 0 8px;
+            font: 500 26px var(--serif)
+        }
+
+        .event p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.8
+        }
+
+        /* roast */
+        .roast {
+            background: #120d09;
+            overflow: hidden
+        }
+
+        .roast-visual {
+            height: 640px;
+            position: relative;
+            border: 1px solid var(--line);
+            background: radial-gradient(circle at 50% 38%, #5d3b22, #150f0b 62%);
+            --h: 0;
+            overflow: hidden
+        }
+
+        .ring {
+            position: absolute;
+            border: 1px solid rgba(247, 240, 228, .12);
+            border-radius: 50%;
+            inset: 8% 18% 34%;
+            animation: spin 24s linear infinite
+        }
+
+        .ring.r2 {
+            inset: 15% 25% 40%;
+            animation-duration: 16s;
+            animation-direction: reverse;
+            border-style: dashed;
+            border-color: rgba(197, 139, 82, .3)
+        }
+
+        .roaster {
+            position: absolute;
+            left: 50%;
+            top: 32%;
+            width: 170px;
+            height: 170px;
+            margin: -85px 0 0 -85px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #d28a45, #5a3219 48%, #160d08 72%);
+            box-shadow: 0 30px 70px #000, inset -20px -20px 30px rgba(0, 0, 0, .5), 0 0 calc(var(--h)*110px) calc(var(--h)*14px) rgba(226, 120, 50, calc(var(--h)*.5))
+        }
+
+        .roaster:after {
+            content: "FIANDA";
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            letter-spacing: .3em;
+            color: #f0d6b3
+        }
+
+        .steam {
+            position: absolute;
+            width: 2px;
+            height: 140px;
+            left: 50%;
+            top: 6%;
+            background: linear-gradient(transparent, rgba(247, 240, 228, .35), transparent);
+            filter: blur(5px);
+            animation: steam 4s ease-in-out infinite
+        }
+
+        .s2 {
+            left: 55%;
+            animation-delay: 1.3s;
+            height: 100px
+        }
+
+        .s3 {
+            left: 45%;
+            animation-delay: 2.2s;
+            height: 170px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes steam {
+
+            0%,
+            100% {
+                transform: translateY(25px) scaleX(1);
+                opacity: 0
+            }
+
+            50% {
+                transform: translateY(-20px) scaleX(4);
+                opacity: .5
+            }
+        }
+
+        .panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 22px 28px 26px;
+            background: linear-gradient(transparent, rgba(12, 9, 6, .9) 30%)
+        }
+
+        .read {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px
+        }
+
+        .temp {
+            font: 600 54px/1 var(--serif);
+            font-variant-numeric: tabular-nums
+        }
+
+        .temp small {
+            font-size: 20px;
+            color: var(--accent)
+        }
+
+        .stage {
+            font-size: 12px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold)
+        }
+
+        .panel svg {
+            width: 100%;
+            height: 120px;
+            display: block;
+            overflow: visible
+        }
+
+        .panel path {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round
+        }
+
+        .panel .base {
+            stroke: var(--line)
+        }
+
+        .panel .live {
+            stroke: var(--gold);
+            filter: drop-shadow(0 0 6px rgba(226, 181, 125, .6))
+        }
+
+        /* menu */
+        .menu {
+            background: #e8dfd0;
+            color: #19130d
+        }
+
+        .menu .body {
+            color: #62584c
+        }
+
+        .menu .kicker {
+            color: #8a5f35
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #b9ac99;
+            margin-top: 60px;
+            border: 1px solid #b9ac99
+        }
+
+        .dish {
+            background: #e8dfd0;
+            padding: 32px;
+            min-height: 290px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .5s cubic-bezier(.2, .7, .2, 1)
+        }
+
+        .dish:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(380px circle at var(--x, 50%) var(--y, 50%), rgba(197, 139, 82, .3), transparent 60%), #f7f0e4;
+            opacity: 0;
+            transition: opacity .4s
+        }
+
+        .dish:hover:before {
+            opacity: 1
+        }
+
+        .dish>* {
+            position: relative
+        }
+
+        .dish .num {
+            font-size: 11px;
+            color: #9a7148;
+            letter-spacing: .1em
+        }
+
+        .dish h3 {
+            font: 600 30px var(--serif);
+            margin: auto 0 10px;
+            padding-top: 50px
+        }
+
+        .dish p {
+            font-size: 14px;
+            color: #756a5d;
+            line-height: 1.6;
+            margin: 0 0 24px
+        }
+
+        .price {
+            font-size: 11px;
+            letter-spacing: .1em;
+            padding-top: 14px;
+            border-top: 1px solid #c9bba6
+        }
+
+        /* place */
+        .place {
+            min-height: 760px;
+            background: linear-gradient(#1d1710, #100d09);
+            display: grid;
+            align-items: end;
+            position: relative;
+            overflow: hidden
+        }
+
+        .fields {
+            position: absolute;
+            inset: 0;
+            pointer-events: none
+        }
+
+        .fields svg {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            bottom: 0
+        }
+
+        .sun {
+            position: absolute;
+            right: 14%;
+            top: 12%;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(240, 170, 90, .5), rgba(240, 170, 90, 0) 68%);
+            filter: blur(6px)
+        }
+
+        .place .wrap {
+            position: relative;
+            z-index: 2
+        }
+
+        .place-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 40px
+        }
+
+        .place h2 {
+            max-width: 650px
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            min-width: 380px
+        }
+
+        .meta div {
+            border-top: 1px solid var(--line);
+            padding-top: 13px;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        .meta strong {
+            display: block;
+            color: var(--cream);
+            font-weight: 500;
+            margin-bottom: 5px
+        }
+
+        footer {
+            padding: 70px 5vw 40px;
+            border-top: 1px solid var(--line);
+            overflow: hidden
+        }
+
+        .frow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            color: var(--muted);
+            font-size: 12px;
+            flex-wrap: wrap;
+            padding-bottom: 50px
+        }
+
+        .mega {
+            font: 600 clamp(70px, 22vw, 330px)/.8 var(--serif);
+            letter-spacing: -.04em;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(226, 181, 125, .5), rgba(226, 181, 125, 0) 85%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none
+        }
+
+        @media(max-width:800px) {
+
+            .navlinks,
+            .cur {
+                display: none
+            }
+
+            .split {
+                grid-template-columns: 1fr;
+                gap: 50px
+            }
+
+            .story-card {
+                min-height: 420px
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr
+            }
+
+            .dish {
+                min-height: 230px
+            }
+
+            .place-info {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .meta {
+                min-width: 0;
+                width: 100%
+            }
+
+            .event {
+                grid-template-columns: 78px 1fr;
+                gap: 20px
+            }
+
+            section {
+                padding: 90px 5vw
+            }
+
+            .roast-visual {
+                height: 580px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            #pre {
+                display: none
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="noise"></div><div id="bar"></div><div class="cur"></div>
-<div id="pre"><div><div class="w" aria-label="Fianda"></div><div class="c">0</div></div></div>
-<nav id="nav"><a class="brand" href="#top">FIANDA</a><div class="navlinks"><a href="#story">Story</a><a href="#coffee">Coffee</a><a href="#menu">Eatery</a><a href="#place">Visit</a></div></nav>
-<main id="top">
-<section class="hero"><canvas id="scene"></canvas>
-<div class="hero-content"><div class="eyebrow" data-in>Coffee Roastery · Eatery · Payakumbuh</div>
-<h1><span class="ln"><span>More than</span></span><span class="ln"><span class="it">coffee.</span></span></h1>
-<p data-in>A place where roasted beans, good food, and slow moments meet in Payakumbuh. Discover Fianda from the bean to the table.</p>
-<a class="btn" data-in data-mag href="#story">Explore Fianda <span>↓</span></a></div>
-<div class="scroll" data-in><i></i>Scroll to discover</div></section>
-<div class="mq" aria-hidden="true"><div><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to table</span><b>✦</b><span>Stay a little longer</span><b>✦</b><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to table</span><b>✦</b><span>Stay a little longer</span><b>✦</b></div></div>
+    <div class="noise"></div>
+    <div id="bar"></div>
+    <div class="cur"></div>
+    <div id="pre">
+        <div>
+            <div class="w" aria-label="Fianda"></div>
+            <div class="c">0</div>
+        </div>
+    </div>
+    <nav id="nav"><a class="brand" href="#top">FIANDA</a>
+        <div class="navlinks"><a href="#story">Story</a><a href="#coffee">Coffee</a><a href="#menu">Eatery</a><a
+                href="#place">Visit</a></div>
+    </nav>
+    <main id="top">
+        <section class="hero"><canvas id="scene"></canvas>
+            <div class="hero-content">
+                <div class="eyebrow" data-in>Coffee Roastery · Eatery · Payakumbuh</div>
+                <h1><span class="ln"><span>More than</span></span><span class="ln"><span
+                            class="it">coffee.</span></span></h1>
+                <p data-in>A place where roasted beans, good food, and slow moments meet in Payakumbuh. Discover Fianda
+                    from the bean to the table.</p>
+                <a class="btn" data-in data-mag href="#story">Explore Fianda <span>↓</span></a>
+            </div>
+            <div class="scroll" data-in><i></i>Scroll to discover</div>
+        </section>
+        <div class="mq" aria-hidden="true">
+            <div><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to table</span><b>✦</b><span>Stay a little
+                    longer</span><b>✦</b><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to
+                    table</span><b>✦</b><span>Stay a little longer</span><b>✦</b></div>
+        </div>
 
-<section id="story"><div class="wrap"><div class="split"><div><div class="kicker">A story in every roast</div><h2 class="display" data-split>From roasted beans to a place to belong.</h2><p class="body" data-up>Fianda began its journey as a roasted-bean supplier in 2018, before growing into a coffee shop where people can enjoy the coffee itself, food, and the atmosphere around it.</p><p class="body" data-up>Today, the concept brings together <b>roastery</b> and <b>eatery</b>—a place to discover coffee, meet people, work, and stay a little longer.</p></div>
-<div class="story-card" data-up><div class="grain g1" data-p="-70"></div><div class="grain g2" data-p="60"></div><div class="grain g3" data-p="-30"></div><div class="stamp">2018 →</div></div></div>
-<div class="timeline"><div class="tl"><i></i></div><div class="event" data-up><div class="year">2018</div><div><h3>The roasting journey begins</h3><p>Fianda is documented as starting as a roasted-bean supplier, building its identity around coffee before expanding its experience for visitors.</p></div></div><div class="event" data-up><div class="year">NOW</div><div><h3>Roastery + Eatery</h3><p>Roasted beans meet drinks, food, and a comfortable space—giving guests a reason to come for coffee and stay for the experience.</p></div></div></div></div></section>
+        <section id="story">
+            <div class="wrap">
+                <div class="split">
+                    <div>
+                        <div class="kicker">A story in every roast</div>
+                        <h2 class="display" data-split>From roasted beans to a place to belong.</h2>
+                        <p class="body" data-up>Fianda began its journey as a roasted-bean supplier in 2018, before
+                            growing into a coffee shop where people can enjoy the coffee itself, food, and the
+                            atmosphere around it.</p>
+                        <p class="body" data-up>Today, the concept brings together <b>roastery</b> and <b>eatery</b>—a
+                            place to discover coffee, meet people, work, and stay a little longer.</p>
+                    </div>
+                    <div class="story-card" data-up>
+                        <div class="grain g1" data-p="-70"></div>
+                        <div class="grain g2" data-p="60"></div>
+                        <div class="grain g3" data-p="-30"></div>
+                        <div class="stamp">2018 →</div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="tl"><i></i></div>
+                    <div class="event" data-up>
+                        <div class="year">2018</div>
+                        <div>
+                            <h3>The roasting journey begins</h3>
+                            <p>Fianda is documented as starting as a roasted-bean supplier, building its identity around
+                                coffee before expanding its experience for visitors.</p>
+                        </div>
+                    </div>
+                    <div class="event" data-up>
+                        <div class="year">NOW</div>
+                        <div>
+                            <h3>Roastery + Eatery</h3>
+                            <p>Roasted beans meet drinks, food, and a comfortable space—giving guests a reason to come
+                                for coffee and stay for the experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="coffee" class="roast"><div class="wrap"><div class="split"><div><div class="kicker">The roast room</div><h2 class="display" data-split>Coffee you can trace back to its character.</h2><p class="body" data-up>A demo concept for Fianda's coffee story: highlight origins, roast profiles, beans, and the craft behind every cup. The final version can be connected to Fianda's actual bean catalogue and roasting details.</p><br><a class="btn" data-mag href="#menu">See the experience ↓</a></div>
-<div class="roast-visual" id="rv"><div class="ring"></div><div class="ring r2"></div><div class="steam"></div><div class="steam s2"></div><div class="steam s3"></div><div class="roaster"></div>
-<div class="panel"><div class="read"><div class="temp"><span id="t">160</span><small>°C</small></div><div class="stage" id="st">Drying</div></div>
-<svg viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13"/><path class="live" id="curve" d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13"/></svg></div></div></div></div></section>
+        <section id="coffee" class="roast">
+            <div class="wrap">
+                <div class="split">
+                    <div>
+                        <div class="kicker">The roast room</div>
+                        <h2 class="display" data-split>Coffee you can trace back to its character.</h2>
+                        <p class="body" data-up>A demo concept for Fianda's coffee story: highlight origins, roast
+                            profiles, beans, and the craft behind every cup. The final version can be connected to
+                            Fianda's actual bean catalogue and roasting details.</p><br><a class="btn" data-mag
+                            href="#menu">See the experience ↓</a>
+                    </div>
+                    <div class="roast-visual" id="rv">
+                        <div class="ring"></div>
+                        <div class="ring r2"></div>
+                        <div class="steam"></div>
+                        <div class="steam s2"></div>
+                        <div class="steam s3"></div>
+                        <div class="roaster"></div>
+                        <div class="panel">
+                            <div class="read">
+                                <div class="temp"><span id="t">160</span><small>°C</small></div>
+                                <div class="stage" id="st">Drying</div>
+                            </div>
+                            <svg viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+                                <path class="base" d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13" />
+                                <path class="live" id="curve"
+                                    d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="menu" class="menu"><div class="wrap"><div class="kicker">Eatery</div><h2 class="display" data-split>Coffee first.<br>Stay for more.</h2><p class="body" data-up>The menu section can become a visual catalogue rather than a long list. These are concept placeholders until Fianda's current menu is supplied.</p>
-<div class="menu-grid"><article class="dish" data-up><div class="num">01 · COFFEE</div><h3>Signature Coffee</h3><p>Espresso-based drinks and Fianda's own coffee character.</p><div class="price">FROM MENU · ASK FIANDA</div></article><article class="dish" data-up><div class="num">02 · MANUAL BREW</div><h3>Single Origin</h3><p>A section for origin stories, tasting notes and brew methods.</p><div class="price">ORIGIN · ROAST · PROFILE</div></article><article class="dish" data-up><div class="num">03 · EATERY</div><h3>Food & Bites</h3><p>Breakfast, meals and snacks made to pair with a slow cup.</p><div class="price">CURRENT MENU · TO BE UPDATED</div></article></div></div></section>
+        <section id="menu" class="menu">
+            <div class="wrap">
+                <div class="kicker">Eatery</div>
+                <h2 class="display" data-split>Coffee first.<br>Stay for more.</h2>
+                <p class="body" data-up>The menu section can become a visual catalogue rather than a long list. These
+                    are concept placeholders until Fianda's current menu is supplied.</p>
+                <div class="menu-grid">
+                    <article class="dish" data-up>
+                        <div class="num">01 · COFFEE</div>
+                        <h3>Signature Coffee</h3>
+                        <p>Espresso-based drinks and Fianda's own coffee character.</p>
+                        <div class="price">FROM MENU · ASK FIANDA</div>
+                    </article>
+                    <article class="dish" data-up>
+                        <div class="num">02 · MANUAL BREW</div>
+                        <h3>Single Origin</h3>
+                        <p>A section for origin stories, tasting notes and brew methods.</p>
+                        <div class="price">ORIGIN · ROAST · PROFILE</div>
+                    </article>
+                    <article class="dish" data-up>
+                        <div class="num">03 · EATERY</div>
+                        <h3>Food & Bites</h3>
+                        <p>Breakfast, meals and snacks made to pair with a slow cup.</p>
+                        <div class="price">CURRENT MENU · TO BE UPDATED</div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<section id="place" class="place"><div class="fields" aria-hidden="true"><div class="sun" data-p="-60"></div>
-<svg viewBox="0 0 1200 400" preserveAspectRatio="none" data-p="-40" style="height:70%"><path d="M0 170Q300 90 600 150T1200 110V400H0Z" fill="#241c12"/></svg>
-<svg viewBox="0 0 1200 400" preserveAspectRatio="none" data-p="-20" style="height:55%"><path d="M0 150Q250 70 520 130T1200 90V400H0Z" fill="#2c2214"/><path d="M0 230Q300 170 640 215T1200 180V400H0Z" fill="#33281a"/></svg>
-<svg viewBox="0 0 1200 400" preserveAspectRatio="none" style="height:35%"><path d="M0 120Q300 60 700 110T1200 70V400H0Z" fill="#100d09"/></svg></div>
-<div class="wrap"><div class="place-info"><div><div class="kicker">Come over</div><h2 class="display" data-split>A coffee room with a view.</h2><p class="body" data-up>The second floor is described by visitors as a comfortable spot with views toward the surrounding rice fields—one of the details that can make Fianda's website feel unmistakably local.</p></div>
-<div class="meta"><div data-up><strong>Address</strong>Jl. Tan Malaka No.146, Napar, Payakumbuh Utara</div><div data-up><strong>Hours</strong>09.00 — 23.00<br>Friday up to 23.30</div><div data-up><strong>Phone / WhatsApp</strong>0812-7797-0863</div><div data-up><strong>Experience</strong>Coffee · Roastery · Eatery · View</div></div></div></div></section>
-</main>
-<footer><div class="frow"><div>COFFEE ROASTERY & EATERY · PAYAKUMBUH</div><a class="btn" data-mag href="https://wa.me/6281277970863" target="_blank" rel="noopener">Chat on WhatsApp →</a></div><div class="mega" aria-hidden="true">FIANDA</div></footer>
+        <section id="place" class="place">
+            <div class="fields" aria-hidden="true">
+                <div class="sun" data-p="-60"></div>
+                <svg viewBox="0 0 1200 400" preserveAspectRatio="none" data-p="-40" style="height:70%">
+                    <path d="M0 170Q300 90 600 150T1200 110V400H0Z" fill="#241c12" />
+                </svg>
+                <svg viewBox="0 0 1200 400" preserveAspectRatio="none" data-p="-20" style="height:55%">
+                    <path d="M0 150Q250 70 520 130T1200 90V400H0Z" fill="#2c2214" />
+                    <path d="M0 230Q300 170 640 215T1200 180V400H0Z" fill="#33281a" />
+                </svg>
+                <svg viewBox="0 0 1200 400" preserveAspectRatio="none" style="height:35%">
+                    <path d="M0 120Q300 60 700 110T1200 70V400H0Z" fill="#100d09" />
+                </svg>
+            </div>
+            <div class="wrap">
+                <div class="place-info">
+                    <div>
+                        <div class="kicker">Come over</div>
+                        <h2 class="display" data-split>A coffee room with a view.</h2>
+                        <p class="body" data-up>The second floor is described by visitors as a comfortable spot with
+                            views toward the surrounding rice fields—one of the details that can make Fianda's website
+                            feel unmistakably local.</p>
+                    </div>
+                    <div class="meta">
+                        <div data-up><strong>Address</strong>Jl. Tan Malaka No.146, Napar, Payakumbuh Utara</div>
+                        <div data-up><strong>Hours</strong>09.00 — 23.00<br>Friday up to 23.30</div>
+                        <div data-up><strong>Phone / WhatsApp</strong>0812-7797-0863</div>
+                        <div data-up><strong>Experience</strong>Coffee · Roastery · Eatery · View</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="frow">
+            <div>COFFEE ROASTERY & EATERY · PAYAKUMBUH</div><a class="btn" data-mag href="https://wa.me/6281277970863"
+                target="_blank" rel="noopener">Chat on WhatsApp →</a>
+        </div>
+        <div class="mega" aria-hidden="true">FIANDA</div>
+    </footer>
 
-<script>
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,FINE=matchMedia('(pointer:fine)').matches;
-gsap.registerPlugin(ScrollTrigger);
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+    <script>
+        const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, FINE = matchMedia('(pointer:fine)').matches;
+        gsap.registerPlugin(ScrollTrigger);
+        const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 
-/* ---------- Three.js hero ---------- */
-const canvas=$('#scene'),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(45,1,.1,100);camera.position.set(0,0,8);
-const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
-const group=new THREE.Group();scene.add(group);
-const mat=new THREE.MeshStandardMaterial({color:0x8f5228,roughness:.42,metalness:.12});
-const geo=new THREE.SphereGeometry(.72,40,24);geo.scale(.62,1,.34);
-const pts0=[],pts1=[];for(let i=0;i<=20;i++){const t=i/10-1,y=t*.68,x=Math.sin(t*3)*.07,z=.245*Math.sqrt(Math.max(0,1-t*t*.88))+.004;pts0.push(new THREE.Vector3(x,y,z));pts1.push(new THREE.Vector3(x,y,-z))}
-const seamMat=new THREE.MeshBasicMaterial({color:0x1a0d06}),seamG=[pts0,pts1].map(p=>new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p),30,.016,6));
-function bean(){const g=new THREE.Group();g.add(new THREE.Mesh(geo,mat));seamG.forEach(s=>g.add(new THREE.Mesh(s,seamMat)));return g}
-const beans=[];for(let i=0;i<16;i++){const b=bean(),s=.5+Math.random()*.6;b.position.set(.2+Math.random()*4.6,(Math.random()-.5)*4,(Math.random()-.6)*3);b.rotation.set(Math.random()*6,Math.random()*6,Math.random()*6);b.userData={s,y0:b.position.y,ph:Math.random()*6,sp:.002+Math.random()*.004};b.scale.setScalar(RM?s:0);group.add(b);beans.push(b)}
-const N=520,pa=new Float32Array(N*3);for(let i=0;i<N;i++){pa[i*3]=(Math.random()-.5)*12;pa[i*3+1]=(Math.random()-.5)*8;pa[i*3+2]=(Math.random()-.5)*6}
-const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xe2b57d,size:.02,transparent:true,opacity:.55}));scene.add(pts);
-scene.add(new THREE.AmbientLight(0xb08560,1.3));const key=new THREE.PointLight(0xffd3a0,6,22);key.position.set(2,3,5);scene.add(key);const rim=new THREE.PointLight(0xff7a30,5,18);rim.position.set(-2,-2,-2);scene.add(rim);
-function fit(){const w=innerWidth,h=$('.hero').clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();group.position.x=w>800?.9:0;group.scale.setScalar(w>800?1:.75)}fit();addEventListener('resize',fit);
-let mx=0,my=0,vis=true;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($('.hero'));
-function tick(t){if(vis&&!document.hidden){group.rotation.y+=(mx*.5-group.rotation.y)*.03;group.rotation.x+=(-my*.3-group.rotation.x)*.03;
-beans.forEach(b=>{const d=b.userData;b.rotation.x+=d.sp;b.rotation.y+=d.sp*1.3;b.position.y=d.y0+Math.sin(t*.0006+d.ph)*.22});
-key.position.x=2+mx*6;key.position.y=3-my*4;pts.rotation.y=t*.00003;pts.position.y=(t*.00012)%1*0;renderer.render(scene,camera)}requestAnimationFrame(tick)}requestAnimationFrame(tick);
+        /* ---------- Three.js hero ---------- */
+        const canvas = $('#scene'), scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(45, 1, .1, 100); camera.position.set(0, 0, 8);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 1.7));
+        const group = new THREE.Group(); scene.add(group);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x8f5228, roughness: .42, metalness: .12 });
+        const geo = new THREE.SphereGeometry(.72, 40, 24); geo.scale(.62, 1, .34);
+        const pts0 = [], pts1 = []; for (let i = 0; i <= 20; i++) { const t = i / 10 - 1, y = t * .68, x = Math.sin(t * 3) * .07, z = .245 * Math.sqrt(Math.max(0, 1 - t * t * .88)) + .004; pts0.push(new THREE.Vector3(x, y, z)); pts1.push(new THREE.Vector3(x, y, -z)) }
+        const seamMat = new THREE.MeshBasicMaterial({ color: 0x1a0d06 }), seamG = [pts0, pts1].map(p => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p), 30, .016, 6));
+        function bean() { const g = new THREE.Group(); g.add(new THREE.Mesh(geo, mat)); seamG.forEach(s => g.add(new THREE.Mesh(s, seamMat))); return g }
+        const beans = []; for (let i = 0; i < 16; i++) { const b = bean(), s = .5 + Math.random() * .6; b.position.set(.2 + Math.random() * 4.6, (Math.random() - .5) * 4, (Math.random() - .6) * 3); b.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); b.userData = { s, y0: b.position.y, ph: Math.random() * 6, sp: .002 + Math.random() * .004 }; b.scale.setScalar(RM ? s : 0); group.add(b); beans.push(b) }
+        const N = 520, pa = new Float32Array(N * 3); for (let i = 0; i < N; i++) { pa[i * 3] = (Math.random() - .5) * 12; pa[i * 3 + 1] = (Math.random() - .5) * 8; pa[i * 3 + 2] = (Math.random() - .5) * 6 }
+        const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pa, 3)); const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xe2b57d, size: .02, transparent: true, opacity: .55 })); scene.add(pts);
+        scene.add(new THREE.AmbientLight(0xb08560, 1.3)); const key = new THREE.PointLight(0xffd3a0, 6, 22); key.position.set(2, 3, 5); scene.add(key); const rim = new THREE.PointLight(0xff7a30, 5, 18); rim.position.set(-2, -2, -2); scene.add(rim);
+        function fit() { const w = innerWidth, h = $('.hero').clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); group.position.x = w > 800 ? .9 : 0; group.scale.setScalar(w > 800 ? 1 : .75) } fit(); addEventListener('resize', fit);
+        let mx = 0, my = 0, vis = true; addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5 });
+        new IntersectionObserver(e => vis = e[0].isIntersecting).observe($('.hero'));
+        function tick(t) {
+            if (vis && !document.hidden) {
+                group.rotation.y += (mx * .5 - group.rotation.y) * .03; group.rotation.x += (-my * .3 - group.rotation.x) * .03;
+                beans.forEach(b => { const d = b.userData; b.rotation.x += d.sp; b.rotation.y += d.sp * 1.3; b.position.y = d.y0 + Math.sin(t * .0006 + d.ph) * .22 });
+                key.position.x = 2 + mx * 6; key.position.y = 3 - my * 4; pts.rotation.y = t * .00003; pts.position.y = (t * .00012) % 1 * 0; renderer.render(scene, camera)
+            } requestAnimationFrame(tick)
+        } requestAnimationFrame(tick);
 
-/* ---------- helpers ---------- */
-$$('[data-split]').forEach(el=>{const walk=n=>[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w.trim()){f.append(w);return}const s=document.createElement('span');s.className='w';s.innerHTML='<i>'+w+'</i>';f.append(s)});c.replaceWith(f)}else walk(c)});walk(el)});
-const word='FIANDA';$('#pre .w').innerHTML=[...word].map(c=>`<span>${c}</span>`).join('');
+        /* ---------- helpers ---------- */
+        $$('[data-split]').forEach(el => { const walk = n => [...n.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) { f.append(w); return } const s = document.createElement('span'); s.className = 'w'; s.innerHTML = '<i>' + w + '</i>'; f.append(s) }); c.replaceWith(f) } else walk(c) }); walk(el) });
+        const word = 'FIANDA'; $('#pre .w').innerHTML = [...word].map(c => `<span>${c}</span>`).join('');
 
-/* ---------- intro sequence ---------- */
-const heroIn=()=>{gsap.timeline()
-.to('.ln>span',{yPercent:0,duration:1.3,ease:'expo.out',stagger:.12})
-.to('[data-in]',{opacity:1,y:0,duration:1,ease:'power3.out',stagger:.1},'-=.9')
-.to(beans.map(b=>b.scale),{x:i=>0,duration:0},0)
-.add(()=>beans.forEach((b,i)=>gsap.to(b.scale,{x:b.userData.s,y:b.userData.s,z:b.userData.s,duration:1.8,delay:i*.06,ease:'elastic.out(1,.6)'})),'-=1.2')};
-if(!RM){gsap.set('.ln>span',{yPercent:110});gsap.set('[data-in]',{opacity:0,y:24});document.body.style.overflow='hidden';
-const c=$('#pre .c'),o={v:0};gsap.timeline({onComplete:()=>{document.body.style.overflow='';$('#pre').remove();ScrollTrigger.refresh()}})
-.to('#pre .w span',{y:0,duration:.9,ease:'expo.out',stagger:.07})
-.to(o,{v:100,duration:1.4,ease:'power2.inOut',onUpdate:()=>c.textContent=Math.round(o.v)},0.2)
-.to('#pre',{yPercent:-100,duration:1,ease:'expo.inOut',delay:.15})
-.add(heroIn,'-=.45')}
+        /* ---------- intro sequence ---------- */
+        const heroIn = () => {
+            gsap.timeline()
+            .to('.ln>span', { yPercent: 0, duration: 1.3, ease: 'expo.out', stagger: .12 })
+            .to('[data-in]', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: .1 }, '-=.9')
+            .to(beans.map(b => b.scale), { x: i => 0, duration: 0 }, 0)
+            .add(() => beans.forEach((b, i) => gsap.to(b.scale, { x: b.userData.s, y: b.userData.s, z: b.userData.s, duration: 1.8, delay: i * .06, ease: 'elastic.out(1,.6)' })), '-=1.2')
+        };
+        if (!RM) {
+            gsap.set('.ln>span', { yPercent: 110 }); gsap.set('[data-in]', { opacity: 0, y: 24 }); document.body.style.overflow = 'hidden';
+            const c = $('#pre .c'), o = { v: 0 }; gsap.timeline({ onComplete: () => { document.body.style.overflow = ''; $('#pre').remove(); ScrollTrigger.refresh() } })
+                .to('#pre .w span', { y: 0, duration: .9, ease: 'expo.out', stagger: .07 })
+                .to(o, { v: 100, duration: 1.4, ease: 'power2.inOut', onUpdate: () => c.textContent = Math.round(o.v) }, 0.2)
+                .to('#pre', { yPercent: -100, duration: 1, ease: 'expo.inOut', delay: .15 })
+                .add(heroIn, '-=.45')
+        }
 
-/* ---------- scroll behaviours ---------- */
-gsap.to('#bar',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:.2}});
-let last=0;const nav=$('#nav');addEventListener('scroll',()=>{const y=scrollY;nav.classList.toggle('solid',y>80);nav.classList.toggle('hide',y>last&&y>400);last=y},{passive:true});
+        /* ---------- scroll behaviours ---------- */
+        gsap.to('#bar', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: .2 } });
+        let last = 0; const nav = $('#nav'); addEventListener('scroll', () => { const y = scrollY; nav.classList.toggle('solid', y > 80); nav.classList.toggle('hide', y > last && y > 400); last = y }, { passive: true });
 
-if(!RM){
-$$('[data-split]').forEach(el=>gsap.from(el.querySelectorAll('.w>i'),{yPercent:115,duration:1.1,ease:'expo.out',stagger:.045,scrollTrigger:{trigger:el,start:'top 85%'}}));
-ScrollTrigger.batch('[data-up]',{start:'top 90%',onEnter:b=>gsap.fromTo(b,{y:40,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',stagger:.12,overwrite:true})});
-gsap.set('[data-up]',{opacity:0});
-$$('[data-p]').forEach(el=>gsap.to(el,{y:+el.dataset.p,ease:'none',scrollTrigger:{trigger:el.closest('section'),start:'top bottom',end:'bottom top',scrub:.6}}));
-gsap.to('.tl i',{scaleY:1,ease:'none',scrollTrigger:{trigger:'.timeline',start:'top 75%',end:'bottom 70%',scrub:.4}});
-gsap.to('.mega',{yPercent:-12,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:.5}});
-gsap.from('.mega',{opacity:0,scale:.92,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 85%'}});
-gsap.to('.hero-content',{yPercent:-12,opacity:.2,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-}else{$$('[data-in]').forEach(e=>e.style.opacity=1)}
+        if (!RM) {
+            $$('[data-split]').forEach(el => gsap.from(el.querySelectorAll('.w>i'), { yPercent: 115, duration: 1.1, ease: 'expo.out', stagger: .045, scrollTrigger: { trigger: el, start: 'top 85%' } }));
+            ScrollTrigger.batch('[data-up]', { start: 'top 90%', onEnter: b => gsap.fromTo(b, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: .12, overwrite: true }) });
+            gsap.set('[data-up]', { opacity: 0 });
+            $$('[data-p]').forEach(el => gsap.to(el, { y: +el.dataset.p, ease: 'none', scrollTrigger: { trigger: el.closest('section'), start: 'top bottom', end: 'bottom top', scrub: .6 } }));
+            gsap.to('.tl i', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'top 75%', end: 'bottom 70%', scrub: .4 } });
+            gsap.to('.mega', { yPercent: -12, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: .5 } });
+            gsap.from('.mega', { opacity: 0, scale: .92, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: 'footer', start: 'top 85%' } });
+            gsap.to('.hero-content', { yPercent: -12, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+        } else { $$('[data-in]').forEach(e => e.style.opacity = 1) }
 
-/* roast curve: drawn on scroll, temperature + stage follow */
-const cv=$('#curve'),L=cv.getTotalLength(),stages=['Drying','Maillard','First crack','Development'],rv=$('#rv');
-cv.style.strokeDasharray=L;cv.style.strokeDashoffset=RM?0:L;
-function roast(p){cv.style.strokeDashoffset=L*(1-p);$('#t').textContent=Math.round(160+p*50);$('#st').textContent=stages[p<.25?0:p<.55?1:p<.82?2:3];rv.style.setProperty('--h',p.toFixed(3))}
-ScrollTrigger.create({trigger:'#coffee',start:'top 65%',end:'bottom 60%',scrub:.5,onUpdate:s=>roast(RM?1:s.progress)});if(RM)roast(1);
+        /* roast curve: drawn on scroll, temperature + stage follow */
+        const cv = $('#curve'), L = cv.getTotalLength(), stages = ['Drying', 'Maillard', 'First crack', 'Development'], rv = $('#rv');
+        cv.style.strokeDasharray = L; cv.style.strokeDashoffset = RM ? 0 : L;
+        function roast(p) { cv.style.strokeDashoffset = L * (1 - p); $('#t').textContent = Math.round(160 + p * 50); $('#st').textContent = stages[p < .25 ? 0 : p < .55 ? 1 : p < .82 ? 2 : 3]; rv.style.setProperty('--h', p.toFixed(3)) }
+        ScrollTrigger.create({ trigger: '#coffee', start: 'top 65%', end: 'bottom 60%', scrub: .5, onUpdate: s => roast(RM ? 1 : s.progress) }); if (RM) roast(1);
 
-/* menu spotlight + subtle tilt */
-$$('.dish').forEach(d=>d.addEventListener('pointermove',e=>{const r=d.getBoundingClientRect();d.style.setProperty('--x',e.clientX-r.left+'px');d.style.setProperty('--y',e.clientY-r.top+'px')}));
+        /* menu spotlight + subtle tilt */
+        $$('.dish').forEach(d => d.addEventListener('pointermove', e => { const r = d.getBoundingClientRect(); d.style.setProperty('--x', e.clientX - r.left + 'px'); d.style.setProperty('--y', e.clientY - r.top + 'px') }));
 
-/* magnetic buttons + cursor ring */
-if(FINE&&!RM){
-$$('[data-mag]').forEach(b=>{const qx=gsap.quickTo(b,'x',{duration:.5,ease:'power3'}),qy=gsap.quickTo(b,'y',{duration:.5,ease:'power3'});
-b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();qx((e.clientX-r.left-r.width/2)*.3);qy((e.clientY-r.top-r.height/2)*.4)});b.addEventListener('pointerleave',()=>{qx(0);qy(0)})});
-const cur=$('.cur'),cx=gsap.quickTo(cur,'x',{duration:.45,ease:'power3'}),cy=gsap.quickTo(cur,'y',{duration:.45,ease:'power3'});
-addEventListener('pointermove',e=>{cx(e.clientX);cy(e.clientY)});
-$$('a,.dish').forEach(a=>{a.addEventListener('pointerenter',()=>cur.classList.add('big'));a.addEventListener('pointerleave',()=>cur.classList.remove('big'))})}
-else $('.cur').style.display='none';
-</script>
-</body></html>
+        /* magnetic buttons + cursor ring */
+        if (FINE && !RM) {
+            $$('[data-mag]').forEach(b => {
+                const qx = gsap.quickTo(b, 'x', { duration: .5, ease: 'power3' }), qy = gsap.quickTo(b, 'y', { duration: .5, ease: 'power3' });
+                b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); qx((e.clientX - r.left - r.width / 2) * .3); qy((e.clientY - r.top - r.height / 2) * .4) }); b.addEventListener('pointerleave', () => { qx(0); qy(0) })
+            });
+            const cur = $('.cur'), cx = gsap.quickTo(cur, 'x', { duration: .45, ease: 'power3' }), cy = gsap.quickTo(cur, 'y', { duration: .45, ease: 'power3' });
+            addEventListener('pointermove', e => { cx(e.clientX); cy(e.clientY) });
+            $$('a,.dish').forEach(a => { a.addEventListener('pointerenter', () => cur.classList.add('big')); a.addEventListener('pointerleave', () => cur.classList.remove('big')) })
+        }
+        else $('.cur').style.display = 'none';
+    </script>
+</body>
+
+</html>
