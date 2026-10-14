@@ -1358,12 +1358,45 @@
         const canvas = $('#scene'), scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(45, 1, .1, 100); camera.position.set(0, 0, 8);
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 1.7));
         const group = new THREE.Group(); scene.add(group);
-        const mat = new THREE.MeshStandardMaterial({ color: 0x8f5228, roughness: .42, metalness: .12 });
-        const geo = new THREE.SphereGeometry(.72, 40, 24); geo.scale(.62, 1, .34);
-        const pts0 = [], pts1 = []; for (let i = 0; i <= 20; i++) { const t = i / 10 - 1, y = t * .68, x = Math.sin(t * 3) * .07, z = .245 * Math.sqrt(Math.max(0, 1 - t * t * .88)) + .004; pts0.push(new THREE.Vector3(x, y, z)); pts1.push(new THREE.Vector3(x, y, -z)) }
-        const seamMat = new THREE.MeshBasicMaterial({ color: 0x1a0d06 }), seamG = [pts0, pts1].map(p => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p), 30, .016, 6));
-        function bean() { const g = new THREE.Group(); g.add(new THREE.Mesh(geo, mat)); seamG.forEach(s => g.add(new THREE.Mesh(s, seamMat))); return g }
-        const beans = []; for (let i = 0; i < 16; i++) { const b = bean(), s = .5 + Math.random() * .6; b.position.set(.2 + Math.random() * 4.6, (Math.random() - .5) * 4, (Math.random() - .6) * 3); b.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); b.userData = { s, y0: b.position.y, ph: Math.random() * 6, sp: .002 + Math.random() * .004 }; b.scale.setScalar(RM ? s : 0); group.add(b); beans.push(b) }
+        const roastCanvas = document.createElement('canvas'); roastCanvas.width = roastCanvas.height = 256;
+        const roastCtx = roastCanvas.getContext('2d'), roastPixels = roastCtx.createImageData(256, 256);
+        for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) {
+            const i = (y * 256 + x) * 4, grain = (Math.random() - .5) * 18 + Math.sin(x * .12 + Math.sin(y * .035) * 4) * 4;
+            roastPixels.data[i] = Math.max(25, Math.min(175, 91 + grain - y * .035));
+            roastPixels.data[i + 1] = Math.max(12, Math.min(112, 43 + grain * .57 - y * .025));
+            roastPixels.data[i + 2] = Math.max(5, Math.min(65, 18 + grain * .3));
+            roastPixels.data[i + 3] = 255
+        }
+        roastCtx.putImageData(roastPixels, 0, 0);
+        const roastTexture = new THREE.CanvasTexture(roastCanvas); roastTexture.encoding = THREE.sRGBEncoding;
+        const mat = new THREE.MeshPhysicalMaterial({ map: roastTexture, roughness: .48, metalness: 0, clearcoat: .1, clearcoatRoughness: .5, bumpMap: roastTexture, bumpScale: .018 });
+        const geo = new THREE.SphereGeometry(.72, 64, 48), vertices = geo.attributes.position;
+        for (let i = 0; i < vertices.count; i++) {
+            let x = vertices.getX(i), y = vertices.getY(i), z = vertices.getZ(i);
+            const taper = 1 - .19 * Math.pow(Math.abs(y / .72), 3);
+            x *= .67 * taper * (1 + .035 * Math.sin(y * 5));
+            z *= .36 * taper;
+            const crease = Math.exp(-Math.pow((x - .035 * Math.sin(y * 3)) / .075, 2)) * Math.pow(Math.max(0, 1 - Math.pow(y / .72, 2)), .45);
+            if (z > 0) z *= 1 - crease * .15;
+            vertices.setXYZ(i, x, y, z)
+        }
+        geo.computeVertexNormals();
+        const seamPoints = [];
+        for (let i = 0; i <= 28; i++) {
+            const t = i / 14 - 1, y = t * .65;
+            const x = .035 * Math.sin(y * 3), taper = 1 - .19 * Math.pow(Math.abs(y / .72), 3);
+            const nx = x / (.67 * taper * (1 + .035 * Math.sin(y * 5))), ny = y / .72;
+            const surfaceZ = .36 * taper * Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+            seamPoints.push(new THREE.Vector3(x, y, surfaceZ * .85 + .002))
+        }
+        const seamMat = new THREE.MeshBasicMaterial({ color: 0x1c0b05 });
+        const seam = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(seamPoints), 48, .008, 6, false);
+        function bean() {
+            const g = new THREE.Group();
+            g.add(new THREE.Mesh(geo, mat), new THREE.Mesh(seam, seamMat));
+            return g
+        }
+        const beans = []; for (let i = 0; i < 16; i++) { const b = bean(), s = .5 + Math.random() * .6; b.position.set(-.2 + Math.random() * 3.2, (Math.random() - .5) * 4, (Math.random() - .6) * 3); b.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6); b.userData = { s, y0: b.position.y, x0: b.position.x, ph: Math.random() * 6, sp: .0012 + Math.random() * .002 }; b.scale.setScalar(RM ? s : 0); group.add(b); beans.push(b) }
         const N = 520, pa = new Float32Array(N * 3); for (let i = 0; i < N; i++) { pa[i * 3] = (Math.random() - .5) * 12; pa[i * 3 + 1] = (Math.random() - .5) * 8; pa[i * 3 + 2] = (Math.random() - .5) * 6 }
         const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pa, 3)); const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xe2b57d, size: .02, transparent: true, opacity: .55 })); scene.add(pts);
         scene.add(new THREE.AmbientLight(0xb08560, 1.3)); const key = new THREE.PointLight(0xffd3a0, 6, 22); key.position.set(2, 3, 5); scene.add(key); const rim = new THREE.PointLight(0xff7a30, 5, 18); rim.position.set(-2, -2, -2); scene.add(rim);
@@ -1373,7 +1406,7 @@
         function tick(t) {
             if (vis && !document.hidden) {
                 group.rotation.y += (mx * .5 - group.rotation.y) * .03; group.rotation.x += (-my * .3 - group.rotation.x) * .03;
-                beans.forEach(b => { const d = b.userData; b.rotation.x += d.sp; b.rotation.y += d.sp * 1.3; b.position.y = d.y0 + Math.sin(t * .0006 + d.ph) * .22 });
+                beans.forEach(b => { const d = b.userData; b.rotation.x += d.sp; b.rotation.y += d.sp * 1.3; b.position.y = d.y0 + Math.sin(t * .00042 + d.ph) * .18; b.position.x = d.x0 + Math.sin(t * .00024 + d.ph) * .12 });
                 key.position.x = 2 + mx * 6; key.position.y = 3 - my * 4; pts.rotation.y = t * .00003; pts.position.y = (t * .00012) % 1 * 0; renderer.render(scene, camera)
             } requestAnimationFrame(tick)
         } requestAnimationFrame(tick);
@@ -1415,7 +1448,7 @@
         } else { $$('[data-in]').forEach(e => e.style.opacity = 1) }
 
         /* roast curve: drawn on scroll, temperature + stage follow */
-        const cv = $('#curve'), L = cv.getTotalLength(), stages = ['Drying', 'Maillard', 'First crack', 'Development'], rv = $('#rv');
+        const cv = $('#curve'), L = cv.getTotalLength(), stages = ['Pengeringan', 'Maillard', 'Retak pertama', 'Pengembangan'], rv = $('#rv');
         cv.style.strokeDasharray = L; cv.style.strokeDashoffset = RM ? 0 : L;
         function roast(p) { cv.style.strokeDashoffset = L * (1 - p); $('#t').textContent = Math.round(160 + p * 50); $('#st').textContent = stages[p < .25 ? 0 : p < .55 ? 1 : p < .82 ? 2 : 3]; rv.style.setProperty('--h', p.toFixed(3)) }
         ScrollTrigger.create({ trigger: '#coffee', start: 'top 65%', end: 'bottom 60%', scrub: .5, onUpdate: s => roast(RM ? 1 : s.progress) }); if (RM) roast(1);
