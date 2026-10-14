@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-    <title>Fianda — Coffee Roastery & Eatery</title>
-    <meta name="description" content="Concept website demo for Fianda Coffee Roastery & Eatery, Payakumbuh." />
+    <title>Fianda — Roastery & Eatery di Payakumbuh</title>
+    <meta name="description" content="Temukan kopi, cerita, dan suasana Fianda Coffee Roastery & Eatery di Payakumbuh." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
@@ -934,6 +934,234 @@
                 display: none
             }
         }
+
+        /* premium finish */
+        :root {
+            --bg: #0c0907;
+            --cream: #f4ecdf;
+            --muted: #b9aa97;
+            --line: rgba(244, 236, 223, .13);
+            --accent: #bd8650;
+            --gold: #e7c18e;
+            --dark: #17110c
+        }
+
+        .hero {
+            background: radial-gradient(ellipse at 74% 44%, #50351f 0, #21160e 34%, #0c0907 72%)
+        }
+
+        .hero:after {
+            background: linear-gradient(90deg, rgba(12, 9, 7, .94) 0%, rgba(12, 9, 7, .56) 46%, rgba(12, 9, 7, .04) 100%), linear-gradient(0deg, var(--bg), transparent 22%)
+        }
+
+        .hero-content {
+            padding-top: 6vh
+        }
+
+        .eyebrow,
+        .kicker {
+            letter-spacing: .24em
+        }
+
+        section {
+            padding-top: clamp(96px, 12vw, 160px);
+            padding-bottom: clamp(96px, 12vw, 160px)
+        }
+
+        .story-card,
+        .roast-visual,
+        .map-frame {
+            border-color: rgba(231, 193, 142, .2);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, .22)
+        }
+
+        .story-card {
+            background: radial-gradient(ellipse at 52% 40%, #543923 0, #21160f 54%, #110c08 100%)
+        }
+
+        .story-card .grain {
+            background: radial-gradient(ellipse at 34% 28%, #d49858 0, #995b30 24%, #4c2815 70%, #251208 100%);
+            box-shadow: inset -24px -24px 32px rgba(0, 0, 0, .53), inset 10px 8px 22px rgba(255, 220, 160, .18), 0 28px 50px rgba(0, 0, 0, .48)
+        }
+
+        .history-head {
+            margin: 110px 0 0 34px;
+            max-width: 700px
+        }
+
+        .history-head .display {
+            margin-bottom: 16px
+        }
+
+        .timeline {
+            margin-top: 30px
+        }
+
+        .event {
+            padding: 38px 0
+        }
+
+        .event:before {
+            box-shadow: 0 0 0 6px rgba(231, 193, 142, .07), 0 0 18px rgba(231, 193, 142, .38)
+        }
+
+        .event p {
+            max-width: 660px
+        }
+
+        .roast-visual {
+            background: radial-gradient(ellipse at 50% 38%, #674425 0, #23170f 52%, #100b08 100%)
+        }
+
+        .menu {
+            background: #e9e0d2
+        }
+
+        .dish {
+            transition: transform .5s cubic-bezier(.2, .7, .2, 1), background-color .35s
+        }
+
+        .dish:hover {
+            transform: translateY(-5px)
+        }
+
+        .place {
+            padding-bottom: 110px
+        }
+
+        .place-info {
+            align-items: start
+        }
+
+        .place-info > div:first-child {
+            max-width: 550px
+        }
+
+        .place-info .body {
+            max-width: 460px
+        }
+
+        .meta {
+            min-width: 420px;
+            max-width: 500px
+        }
+
+        .meta div {
+            border-color: rgba(231, 193, 142, .24)
+        }
+
+        .map-row {
+            display: grid;
+            grid-template-columns: 1.55fr .75fr;
+            gap: 28px;
+            margin-top: 74px;
+            align-items: stretch
+        }
+
+        .map-frame {
+            min-height: 390px;
+            overflow: hidden;
+            background: #211a14
+        }
+
+        .map-frame iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 390px;
+            border: 0;
+            filter: grayscale(.72) sepia(.24) contrast(.94) brightness(.78)
+        }
+
+        .visit-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(26px, 4vw, 44px);
+            border: 1px solid var(--line);
+            background: linear-gradient(145deg, rgba(231, 193, 142, .08), rgba(255, 255, 255, .015))
+        }
+
+        .visit-card .visit-index {
+            color: var(--accent);
+            font-size: 10px;
+            letter-spacing: .25em;
+            text-transform: uppercase
+        }
+
+        .visit-card h3 {
+            margin: 28px 0 12px;
+            font: 500 clamp(25px, 3vw, 38px)/1.15 var(--serif)
+        }
+
+        .visit-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8
+        }
+
+        .visit-card .btn {
+            align-self: flex-start;
+            margin-top: 28px
+        }
+
+        .place .fields {
+            opacity: .78
+        }
+
+        @media(max-width:800px) {
+            .history-head {
+                margin: 78px 0 0 34px
+            }
+
+            .place-info {
+                gap: 34px
+            }
+
+            .meta {
+                min-width: 0
+            }
+
+            .map-row {
+                grid-template-columns: 1fr;
+                margin-top: 48px
+            }
+
+            .map-frame,
+            .map-frame iframe {
+                min-height: 320px
+            }
+
+            .visit-card {
+                min-height: 300px
+            }
+        }
+
+        @media(max-width:480px) {
+            .history-head {
+                margin-left: 24px
+            }
+
+            .event {
+                grid-template-columns: 68px 1fr;
+                gap: 16px
+            }
+
+            .year {
+                font-size: 25px
+            }
+
+            .meta {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 14px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .dish:hover {
+                transform: none
+            }
+        }
     </style>
 </head>
 
@@ -948,62 +1176,61 @@
         </div>
     </div>
     <nav id="nav"><a class="brand" href="#top">FIANDA</a>
-        <div class="navlinks"><a href="#story">Story</a><a href="#coffee">Coffee</a><a href="#menu">Eatery</a><a
-                href="#place">Visit</a></div>
+        <div class="navlinks"><a href="#story">Cerita</a><a href="#history">Riwayat</a><a href="#coffee">Kopi</a><a
+                href="#menu">Menu</a><a href="#place">Lokasi</a></div>
     </nav>
     <main id="top">
         <section class="hero"><canvas id="scene"></canvas>
             <div class="hero-content">
-                <div class="eyebrow" data-in>Coffee Roastery · Eatery · Payakumbuh</div>
-                <h1><span class="ln"><span>More than</span></span><span class="ln"><span
-                            class="it">coffee.</span></span></h1>
-                <p data-in>A place where roasted beans, good food, and slow moments meet in Payakumbuh. Discover Fianda
-                    from the bean to the table.</p>
-                <a class="btn" data-in data-mag href="#story">Explore Fianda <span>↓</span></a>
+                <div class="eyebrow" data-in>Roastery · Eatery · Payakumbuh</div>
+                <h1><span class="ln"><span>Lebih dari</span></span><span class="ln"><span
+                            class="it">secangkir.</span></span></h1>
+                <p data-in>Tempat biji pilihan, racikan penuh karakter, dan momen yang terasa lebih pelan bertemu. Selamat datang di Fianda.</p>
+                <a class="btn" data-in data-mag href="#story">Kenali Fianda <span>↓</span></a>
             </div>
-            <div class="scroll" data-in><i></i>Scroll to discover</div>
+            <div class="scroll" data-in><i></i>Gulir untuk menjelajah</div>
         </section>
         <div class="mq" aria-hidden="true">
-            <div><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to table</span><b>✦</b><span>Stay a little
-                    longer</span><b>✦</b><span>Roasted in Payakumbuh</span><b>✦</b><span>From bean to
-                    table</span><b>✦</b><span>Stay a little longer</span><b>✦</b></div>
+            <div><span>Disangrai di Payakumbuh</span><b>✦</b><span>Dari biji hingga ke cangkir</span><b>✦</b><span>Singgah lebih
+                    lama</span><b>✦</b><span>Disangrai di Payakumbuh</span><b>✦</b><span>Dari biji hingga ke
+                    cangkir</span><b>✦</b><span>Singgah lebih lama</span><b>✦</b></div>
         </div>
 
         <section id="story">
             <div class="wrap">
                 <div class="split">
                     <div>
-                        <div class="kicker">A story in every roast</div>
-                        <h2 class="display" data-split>From roasted beans to a place to belong.</h2>
-                        <p class="body" data-up>Fianda began its journey as a roasted-bean supplier in 2018, before
-                            growing into a coffee shop where people can enjoy the coffee itself, food, and the
-                            atmosphere around it.</p>
-                        <p class="body" data-up>Today, the concept brings together <b>roastery</b> and <b>eatery</b>—a
-                            place to discover coffee, meet people, work, and stay a little longer.</p>
+                        <div class="kicker">Cerita di setiap sangraian</div>
+                        <h2 class="display" data-split>Berawal dari biji kopi, tumbuh menjadi ruang untuk singgah.</h2>
+                        <p class="body" data-up>Perjalanan Fianda dimulai pada 2018 sebagai pemasok biji kopi sangrai. Kecintaan pada kopi kemudian berkembang menjadi pengalaman yang bisa dinikmati langsung.</p>
+                        <p class="body" data-up>Kini, <b>roastery</b> dan <b>eatery</b> hadir dalam satu ruang—untuk menikmati kopi, menyantap hidangan, dan menghabiskan waktu bersama.</p>
                     </div>
                     <div class="story-card" data-up>
                         <div class="grain g1" data-p="-70"></div>
                         <div class="grain g2" data-p="60"></div>
                         <div class="grain g3" data-p="-30"></div>
-                        <div class="stamp">2018 →</div>
+                        <div class="stamp">Dari 2018</div>
                     </div>
                 </div>
-                <div class="timeline">
+                <div class="history-head" id="history">
+                    <div class="kicker">Jejak perjalanan</div>
+                    <h2 class="display" data-split>Dari sangraian menuju ruang temu.</h2>
+                    <p class="body" data-up>Setiap langkah Fianda berangkat dari satu hal yang sama: menghadirkan kopi dengan sepenuh hati.</p>
+                </div>
+                <div class="timeline" aria-label="Riwayat Fianda">
                     <div class="tl"><i></i></div>
                     <div class="event" data-up>
                         <div class="year">2018</div>
                         <div>
-                            <h3>The roasting journey begins</h3>
-                            <p>Fianda is documented as starting as a roasted-bean supplier, building its identity around
-                                coffee before expanding its experience for visitors.</p>
+                            <h3>Memulai perjalanan sebagai pemasok biji sangrai</h3>
+                            <p>Fianda memulai perjalanan dengan memasok biji kopi sangrai, membangun pengalaman dan karakter dari balik setiap biji.</p>
                         </div>
                     </div>
                     <div class="event" data-up>
-                        <div class="year">NOW</div>
+                        <div class="year">Kini</div>
                         <div>
-                            <h3>Roastery + Eatery</h3>
-                            <p>Roasted beans meet drinks, food, and a comfortable space—giving guests a reason to come
-                                for coffee and stay for the experience.</p>
+                            <h3>Roastery bertemu eatery</h3>
+                            <p>Dari pemasok kopi, Fianda tumbuh menjadi tempat untuk menikmati kopi, hidangan, dan suasana Payakumbuh dalam satu kunjungan.</p>
                         </div>
                     </div>
                 </div>
@@ -1014,12 +1241,10 @@
             <div class="wrap">
                 <div class="split">
                     <div>
-                        <div class="kicker">The roast room</div>
-                        <h2 class="display" data-split>Coffee you can trace back to its character.</h2>
-                        <p class="body" data-up>A demo concept for Fianda's coffee story: highlight origins, roast
-                            profiles, beans, and the craft behind every cup. The final version can be connected to
-                            Fianda's actual bean catalogue and roasting details.</p><br><a class="btn" data-mag
-                            href="#menu">See the experience ↓</a>
+                        <div class="kicker">Ruang sangrai</div>
+                        <h2 class="display" data-split>Karakter kopi terasa sejak aroma pertama.</h2>
+                        <p class="body" data-up>Di balik setiap cangkir ada biji kopi yang disangrai dengan perhatian. Nikmati karakter kopi Fianda, dari ruang sangrai hingga tersaji di meja.</p><br><a class="btn" data-mag
+                            href="#menu">Jelajahi menu ↓</a>
                     </div>
                     <div class="roast-visual" id="rv">
                         <div class="ring"></div>
@@ -1046,28 +1271,27 @@
 
         <section id="menu" class="menu">
             <div class="wrap">
-                <div class="kicker">Eatery</div>
-                <h2 class="display" data-split>Coffee first.<br>Stay for more.</h2>
-                <p class="body" data-up>The menu section can become a visual catalogue rather than a long list. These
-                    are concept placeholders until Fianda's current menu is supplied.</p>
+                <div class="kicker">Dari meja Fianda</div>
+                <h2 class="display" data-split>Datang untuk kopi.<br>Singgah lebih lama.</h2>
+                <p class="body" data-up>Temukan teman yang pas untuk waktu santai: racikan kopi, seduhan pilihan, dan hidangan untuk dinikmati bersama.</p>
                 <div class="menu-grid">
                     <article class="dish" data-up>
-                        <div class="num">01 · COFFEE</div>
-                        <h3>Signature Coffee</h3>
-                        <p>Espresso-based drinks and Fianda's own coffee character.</p>
-                        <div class="price">FROM MENU · ASK FIANDA</div>
+                        <div class="num">01 · KOPI</div>
+                        <h3>Kopi Andalan</h3>
+                        <p>Racikan berbasis espresso dengan karakter khas Fianda.</p>
+                        <div class="price">TANYAKAN MENU HARI INI</div>
                     </article>
                     <article class="dish" data-up>
-                        <div class="num">02 · MANUAL BREW</div>
+                        <div class="num">02 · SEDUHAN</div>
                         <h3>Single Origin</h3>
-                        <p>A section for origin stories, tasting notes and brew methods.</p>
-                        <div class="price">ORIGIN · ROAST · PROFILE</div>
+                        <p>Kenali ragam asal biji, cita rasa, dan cara seduhnya.</p>
+                        <div class="price">ASAL · SANGRAI · KARAKTER</div>
                     </article>
                     <article class="dish" data-up>
-                        <div class="num">03 · EATERY</div>
-                        <h3>Food & Bites</h3>
-                        <p>Breakfast, meals and snacks made to pair with a slow cup.</p>
-                        <div class="price">CURRENT MENU · TO BE UPDATED</div>
+                        <div class="num">03 · HIDANGAN</div>
+                        <h3>Sajian & Camilan</h3>
+                        <p>Teman bersantap dan camilan untuk melengkapi waktu minum kopi.</p>
+                        <div class="price">TANYAKAN MENU HARI INI</div>
                     </article>
                 </div>
             </div>
@@ -1090,17 +1314,28 @@
             <div class="wrap">
                 <div class="place-info">
                     <div>
-                        <div class="kicker">Come over</div>
-                        <h2 class="display" data-split>A coffee room with a view.</h2>
-                        <p class="body" data-up>The second floor is described by visitors as a comfortable spot with
-                            views toward the surrounding rice fields—one of the details that can make Fianda's website
-                            feel unmistakably local.</p>
+                        <div class="kicker">Temukan Fianda</div>
+                        <h2 class="display" data-split>Secangkir kopi, dengan suasana Payakumbuh.</h2>
+                        <p class="body" data-up>Singgah di Fianda untuk menikmati kopi, hidangan, dan suasana yang nyaman. Kami tunggu di Payakumbuh.</p>
                     </div>
                     <div class="meta">
-                        <div data-up><strong>Address</strong>Jl. Tan Malaka No.146, Napar, Payakumbuh Utara</div>
-                        <div data-up><strong>Hours</strong>09.00 — 23.00<br>Friday up to 23.30</div>
-                        <div data-up><strong>Phone / WhatsApp</strong>0812-7797-0863</div>
-                        <div data-up><strong>Experience</strong>Coffee · Roastery · Eatery · View</div>
+                        <div data-up><strong>Alamat</strong>Jl. Tan Malaka No.146, Napar, Payakumbuh Utara</div>
+                        <div data-up><strong>Jam buka</strong>09.00 — 23.00<br>Jumat hingga 23.30</div>
+                        <div data-up><strong>Telepon / WhatsApp</strong>0812-7797-0863</div>
+                        <div data-up><strong>Di sini ada</strong>Kopi · Roastery · Eatery</div>
+                    </div>
+                </div>
+                <div class="map-row">
+                    <div class="map-frame">
+                        <iframe title="Peta lokasi Fianda di Payakumbuh" src="https://maps.google.com/maps?q=Jl.%20Tan%20Malaka%20No.146%2C%20Napar%2C%20Payakumbuh%20Utara&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    </div>
+                    <div class="visit-card">
+                        <div>
+                            <div class="visit-index">Fianda · Payakumbuh</div>
+                            <h3>Jadikan Fianda tujuan singgah berikutnya.</h3>
+                            <p>Temukan rute menuju Jl. Tan Malaka No.146, Napar, Payakumbuh Utara.</p>
+                        </div>
+                        <a class="btn" data-mag href="https://www.google.com/maps/search/?api=1&query=Jl.%20Tan%20Malaka%20No.146%2C%20Napar%2C%20Payakumbuh%20Utara" target="_blank" rel="noopener">Buka petunjuk arah <span>↗</span></a>
                     </div>
                 </div>
             </div>
@@ -1108,8 +1343,8 @@
     </main>
     <footer>
         <div class="frow">
-            <div>COFFEE ROASTERY & EATERY · PAYAKUMBUH</div><a class="btn" data-mag href="https://wa.me/6281277970863"
-                target="_blank" rel="noopener">Chat on WhatsApp →</a>
+            <div>ROASTERY & EATERY · PAYAKUMBUH</div><a class="btn" data-mag href="https://wa.me/6281277970863"
+                target="_blank" rel="noopener">Hubungi via WhatsApp →</a>
         </div>
         <div class="mega" aria-hidden="true">FIANDA</div>
     </footer>
