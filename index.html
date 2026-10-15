@@ -433,57 +433,32 @@
             min-height: 540px;
             border: 1px solid var(--line);
             overflow: hidden;
-            background: radial-gradient(circle at 50% 40%, #4a3322, #17110d 70%)
+            background: #17110d
         }
 
-        .story-card .grain {
+        .story-card > img {
             position: absolute;
-            width: 180px;
-            height: 260px;
-            border-radius: 50%;
-            background: radial-gradient(ellipse at 35% 35%, #c08040 0 3%, #7a4725 22%, #27150c 70%);
-            filter: drop-shadow(0 24px 30px #000);
-            box-shadow: inset -20px -15px 30px rgba(0, 0, 0, .55), inset 10px 5px 15px rgba(255, 220, 160, .1)
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
         }
 
-        .grain:after {
+        .story-card:after {
             content: "";
             position: absolute;
-            left: 50%;
-            top: 6%;
-            bottom: 6%;
-            width: 5px;
-            margin-left: -2px;
-            border-radius: 5px;
-            background: #170b05;
-            transform: skewX(-8deg);
-            box-shadow: 1px 0 0 rgba(255, 220, 160, .08)
-        }
-
-        .g1 {
-            left: 16%;
-            top: 12%;
-            transform: rotate(-25deg)
-        }
-
-        .g2 {
-            right: 14%;
-            top: 30%;
-            transform: rotate(30deg) scale(.75)
-        }
-
-        .g3 {
-            left: 40%;
-            bottom: 6%;
-            transform: rotate(7deg) scale(.55)
+            inset: 35% 0 0;
+            background: linear-gradient(transparent, rgba(12, 9, 7, .72));
+            pointer-events: none
         }
 
         .story-card .stamp {
             position: absolute;
+            z-index: 1;
             bottom: 26px;
             left: 28px;
             font: 600 52px var(--serif);
-            color: rgba(247, 240, 228, .2)
+            color: rgba(247, 240, 228, .78)
         }
 
         .timeline {
@@ -553,149 +528,40 @@
         }
 
         .roast-visual {
-            height: 640px;
+            min-height: 640px;
             position: relative;
             border: 1px solid var(--line);
-            background: radial-gradient(circle at 50% 38%, #5d3b22, #150f0b 62%);
-            --h: 0;
+            background: #150f0b;
             overflow: hidden
         }
 
-        .ring {
-            position: absolute;
-            border: 1px solid rgba(247, 240, 228, .12);
-            border-radius: 50%;
-            inset: 8% 18% 34%;
-            animation: spin 24s linear infinite
-        }
-
-        .ring.r2 {
-            inset: 15% 25% 40%;
-            animation-duration: 16s;
-            animation-direction: reverse;
-            border-style: dashed;
-            border-color: rgba(197, 139, 82, .3)
-        }
-
-        .roaster {
-            position: absolute;
-            left: 50%;
-            top: 32%;
-            width: 170px;
-            height: 170px;
-            margin: -85px 0 0 -85px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 30%, #d28a45, #5a3219 48%, #160d08 72%);
-            box-shadow: 0 30px 70px #000, inset -20px -20px 30px rgba(0, 0, 0, .5), 0 0 calc(var(--h)*110px) calc(var(--h)*14px) rgba(226, 120, 50, calc(var(--h)*.5))
-        }
-
-        .roaster:after {
-            content: "FIANDA";
+        .roast-visual img {
             position: absolute;
             inset: 0;
-            display: grid;
-            place-items: center;
-            font-size: 12px;
-            letter-spacing: .3em;
-            color: #f0d6b3
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.78) saturate(.82)
         }
 
-        .steam {
-            position: absolute;
-            width: 2px;
-            height: 140px;
-            left: 50%;
-            top: 6%;
-            background: linear-gradient(transparent, rgba(247, 240, 228, .35), transparent);
-            filter: blur(5px);
-            animation: steam 4s ease-in-out infinite
-        }
-
-        .s2 {
-            left: 55%;
-            animation-delay: 1.3s;
-            height: 100px
-        }
-
-        .s3 {
-            left: 45%;
-            animation-delay: 2.2s;
-            height: 170px
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-
-        @keyframes steam {
-
-            0%,
-            100% {
-                transform: translateY(25px) scaleX(1);
-                opacity: 0
-            }
-
-            50% {
-                transform: translateY(-20px) scaleX(4);
-                opacity: .5
-            }
-        }
-
-        .panel {
+        .roast-caption {
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
-            padding: 22px 28px 26px;
-            background: linear-gradient(transparent, rgba(12, 9, 6, .9) 30%)
+            padding: 90px 28px 28px;
+            background: linear-gradient(transparent, rgba(12, 9, 6, .82));
+            color: var(--cream);
+            font: 500 clamp(22px, 3vw, 32px)/1.2 var(--serif)
         }
 
-        .read {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 6px
-        }
-
-        .temp {
-            font: 600 54px/1 var(--serif);
-            font-variant-numeric: tabular-nums
-        }
-
-        .temp small {
-            font-size: 20px;
-            color: var(--accent)
-        }
-
-        .stage {
-            font-size: 12px;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--gold)
-        }
-
-        .panel svg {
-            width: 100%;
-            height: 120px;
+        .roast-caption small {
             display: block;
-            overflow: visible
-        }
-
-        .panel path {
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round
-        }
-
-        .panel .base {
-            stroke: var(--line)
-        }
-
-        .panel .live {
-            stroke: var(--gold);
-            filter: drop-shadow(0 0 6px rgba(226, 181, 125, .6))
+            margin-bottom: 9px;
+            color: var(--gold);
+            font: 500 10px/1.4 'DM Sans', system-ui, sans-serif;
+            letter-spacing: .22em;
+            text-transform: uppercase
         }
 
         /* menu */
@@ -920,7 +786,7 @@
             }
 
             .roast-visual {
-                height: 580px
+                min-height: 580px
             }
         }
 
@@ -975,13 +841,13 @@
             box-shadow: 0 28px 80px rgba(0, 0, 0, .22)
         }
 
-        .story-card {
-            background: radial-gradient(ellipse at 52% 40%, #543923 0, #21160f 54%, #110c08 100%)
+        .story-card > img {
+            filter: brightness(.86) saturate(.85);
+            transition: transform .8s cubic-bezier(.2, .7, .2, 1)
         }
 
-        .story-card .grain {
-            background: radial-gradient(ellipse at 34% 28%, #d49858 0, #995b30 24%, #4c2815 70%, #251208 100%);
-            box-shadow: inset -24px -24px 32px rgba(0, 0, 0, .53), inset 10px 8px 22px rgba(255, 220, 160, .18), 0 28px 50px rgba(0, 0, 0, .48)
+        .story-card:hover > img {
+            transform: scale(1.035)
         }
 
         .history-head {
@@ -1010,7 +876,7 @@
         }
 
         .roast-visual {
-            background: radial-gradient(ellipse at 50% 38%, #674425 0, #23170f 52%, #100b08 100%)
+            background: #100b08
         }
 
         .menu {
@@ -1023,6 +889,165 @@
 
         .dish:hover {
             transform: translateY(-5px)
+        }
+
+        /* gallery */
+        .gallery {
+            background: #100d09
+        }
+
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 32px;
+            margin-bottom: 44px
+        }
+
+        .gallery-head .display {
+            max-width: 720px;
+            margin-bottom: 0
+        }
+
+        .gallery-note {
+            max-width: 280px;
+            margin: 0 0 6px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-auto-rows: 190px;
+            gap: 12px
+        }
+
+        .gallery-item {
+            position: relative;
+            min-width: 0;
+            padding: 0;
+            border: 1px solid rgba(231, 193, 142, .18);
+            background: #21170f;
+            overflow: hidden;
+            color: var(--cream);
+            text-align: left;
+            cursor: pointer
+        }
+
+        .gallery-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2
+        }
+
+        .gallery-item:nth-child(2),
+        .gallery-item:nth-child(5) {
+            grid-column: span 2
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .8s cubic-bezier(.2, .7, .2, 1), filter .5s;
+            filter: brightness(.78) saturate(.82)
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:focus-visible img {
+            transform: scale(1.045);
+            filter: brightness(.98) saturate(1)
+        }
+
+        .gallery-caption {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 46px 20px 18px;
+            background: linear-gradient(transparent, rgba(12, 9, 7, .86));
+            font: 500 20px/1.2 var(--serif)
+        }
+
+        .gallery-caption small {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--gold);
+            font: 500 9px/1.4 'DM Sans', system-ui, sans-serif;
+            letter-spacing: .2em;
+            text-transform: uppercase
+        }
+
+        .gallery-dialog {
+            width: min(1000px, calc(100% - 32px));
+            max-width: none;
+            max-height: calc(100% - 32px);
+            padding: 0;
+            border: 1px solid rgba(231, 193, 142, .28);
+            background: #100d09;
+            color: var(--cream)
+        }
+
+        .gallery-dialog::backdrop {
+            background: rgba(7, 5, 4, .88);
+            backdrop-filter: blur(8px)
+        }
+
+        .gallery-dialog figure {
+            position: relative;
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) auto;
+            height: min(78vh, 720px);
+            margin: 0
+        }
+
+        .gallery-dialog img {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            object-fit: contain;
+            background: #080605
+        }
+
+        .gallery-dialog figcaption {
+            padding: 16px 70px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .gallery-dialog button {
+            position: absolute;
+            z-index: 1;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(244, 236, 223, .35);
+            border-radius: 50%;
+            background: rgba(12, 9, 7, .75);
+            color: var(--cream);
+            font: 22px/1 'DM Sans', system-ui, sans-serif;
+            cursor: pointer
+        }
+
+        .gallery-dialog .gallery-close {
+            top: 14px;
+            right: 14px
+        }
+
+        .gallery-dialog .gallery-prev,
+        .gallery-dialog .gallery-next {
+            top: 50%;
+            transform: translateY(-50%)
+        }
+
+        .gallery-dialog .gallery-prev {
+            left: 14px
+        }
+
+        .gallery-dialog .gallery-next {
+            right: 14px
         }
 
         .place {
@@ -1114,6 +1139,28 @@
                 margin: 78px 0 0 34px
             }
 
+            .gallery-head {
+                display: block
+            }
+
+            .gallery-note {
+                margin-top: 20px
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 170px
+            }
+
+            .gallery-item:first-child {
+                grid-row: span 2
+            }
+
+            .gallery-item:nth-child(2),
+            .gallery-item:nth-child(5) {
+                grid-column: span 1
+            }
+
             .place-info {
                 gap: 34px
             }
@@ -1140,6 +1187,28 @@
         @media(max-width:480px) {
             .history-head {
                 margin-left: 24px
+            }
+
+            .gallery-grid {
+                grid-auto-rows: 135px;
+                gap: 8px
+            }
+
+            .gallery-caption {
+                padding: 34px 12px 12px;
+                font-size: 16px
+            }
+
+            .gallery-caption small {
+                font-size: 8px
+            }
+
+            .gallery-dialog figure {
+                height: min(72vh, 560px)
+            }
+
+            .gallery-dialog figcaption {
+                padding-inline: 58px
             }
 
             .event {
@@ -1177,7 +1246,7 @@
     </div>
     <nav id="nav"><a class="brand" href="#top">FIANDA</a>
         <div class="navlinks"><a href="#story">Cerita</a><a href="#history">Riwayat</a><a href="#coffee">Kopi</a><a
-                href="#menu">Menu</a><a href="#place">Lokasi</a></div>
+                href="#menu">Menu</a><a href="#gallery">Galeri</a><a href="#place">Lokasi</a></div>
     </nav>
     <main id="top">
         <section class="hero"><canvas id="scene"></canvas>
@@ -1206,9 +1275,7 @@
                         <p class="body" data-up>Kini, <b>roastery</b> dan <b>eatery</b> hadir dalam satu ruang—untuk menikmati kopi, menyantap hidangan, dan menghabiskan waktu bersama.</p>
                     </div>
                     <div class="story-card" data-up>
-                        <div class="grain g1" data-p="-70"></div>
-                        <div class="grain g2" data-p="60"></div>
-                        <div class="grain g3" data-p="-30"></div>
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85" alt="Suasana interior kedai kopi yang hangat" loading="lazy" decoding="async">
                         <div class="stamp">Dari 2018</div>
                     </div>
                 </div>
@@ -1246,24 +1313,9 @@
                         <p class="body" data-up>Di balik setiap cangkir ada biji kopi yang disangrai dengan perhatian. Nikmati karakter kopi Fianda, dari ruang sangrai hingga tersaji di meja.</p><br><a class="btn" data-mag
                             href="#menu">Jelajahi menu ↓</a>
                     </div>
-                    <div class="roast-visual" id="rv">
-                        <div class="ring"></div>
-                        <div class="ring r2"></div>
-                        <div class="steam"></div>
-                        <div class="steam s2"></div>
-                        <div class="steam s3"></div>
-                        <div class="roaster"></div>
-                        <div class="panel">
-                            <div class="read">
-                                <div class="temp"><span id="t">160</span><small>°C</small></div>
-                                <div class="stage" id="st">Drying</div>
-                            </div>
-                            <svg viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
-                                <path class="base" d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13" />
-                                <path class="live" id="curve"
-                                    d="M0 104C60 112 90 82 140 72S250 42 300 27 380 16 400 13" />
-                            </svg>
-                        </div>
+                    <div class="roast-visual">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=85" alt="Proses meracik kopi dengan metode seduh manual" loading="lazy" decoding="async">
+                        <div class="roast-caption"><small>Dari biji hingga ke cangkir</small>Karakter kopi terasa sejak aroma pertama</div>
                     </div>
                 </div>
             </div>
@@ -1296,6 +1348,54 @@
                 </div>
             </div>
         </section>
+
+        <section id="gallery" class="gallery">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <div class="kicker">Potret suasana</div>
+                        <h2 class="display" data-split>Ruang untuk menikmati setiap momen.</h2>
+                    </div>
+                    <p class="gallery-note" data-up>Foto inspirasi sementara untuk melengkapi galeri Fianda. Pilih foto untuk melihat lebih dekat.</p>
+                </div>
+                <div class="gallery-grid" aria-label="Galeri inspirasi Fianda">
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1800&q=90" data-caption="Ruang hangat untuk singgah">
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=85" alt="Inspirasi interior kedai kopi yang hangat" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>01 · Suasana</small>Ruang hangat untuk singgah</span>
+                    </button>
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=90" data-caption="Cerita dimulai dari biji pilihan">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=85" alt="Biji kopi dan proses persiapan seduhan" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>02 · Roastery</small>Cerita dimulai dari biji pilihan</span>
+                    </button>
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=90" data-caption="Teman untuk jeda sejenak">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85" alt="Secangkir kopi untuk menemani waktu santai" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>03 · Kopi</small>Teman untuk jeda sejenak</span>
+                    </button>
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1800&q=90" data-caption="Tempat bertemu dan berbagi cerita">
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85" alt="Inspirasi area duduk di coffee shop" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>04 · Eatery</small>Tempat bertemu dan berbagi cerita</span>
+                    </button>
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=90" data-caption="Singgah lebih lama, terasa lebih dekat">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85" alt="Interior restoran yang nyaman dan hangat" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>05 · Momen</small>Singgah lebih lama, terasa lebih dekat</span>
+                    </button>
+                    <button class="gallery-item" type="button" data-full="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1800&q=90" data-caption="Sajian kopi untuk dinikmati perlahan">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=85" alt="Kopi yang disajikan di atas meja" loading="lazy" decoding="async">
+                        <span class="gallery-caption"><small>06 · Sajian</small>Sajian kopi untuk dinikmati perlahan</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <dialog class="gallery-dialog" aria-label="Tampilan foto galeri">
+            <figure>
+                <button class="gallery-close" type="button" aria-label="Tutup galeri">×</button>
+                <button class="gallery-prev" type="button" aria-label="Foto sebelumnya">‹</button>
+                <img alt="">
+                <button class="gallery-next" type="button" aria-label="Foto berikutnya">›</button>
+                <figcaption></figcaption>
+            </figure>
+        </dialog>
 
         <section id="place" class="place">
             <div class="fields" aria-hidden="true">
@@ -1447,14 +1547,35 @@
             gsap.to('.hero-content', { yPercent: -12, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
         } else { $$('[data-in]').forEach(e => e.style.opacity = 1) }
 
-        /* roast curve: drawn on scroll, temperature + stage follow */
-        const cv = $('#curve'), L = cv.getTotalLength(), stages = ['Pengeringan', 'Maillard', 'Retak pertama', 'Pengembangan'], rv = $('#rv');
-        cv.style.strokeDasharray = L; cv.style.strokeDashoffset = RM ? 0 : L;
-        function roast(p) { cv.style.strokeDashoffset = L * (1 - p); $('#t').textContent = Math.round(160 + p * 50); $('#st').textContent = stages[p < .25 ? 0 : p < .55 ? 1 : p < .82 ? 2 : 3]; rv.style.setProperty('--h', p.toFixed(3)) }
-        ScrollTrigger.create({ trigger: '#coffee', start: 'top 65%', end: 'bottom 60%', scrub: .5, onUpdate: s => roast(RM ? 1 : s.progress) }); if (RM) roast(1);
-
         /* menu spotlight + subtle tilt */
         $$('.dish').forEach(d => d.addEventListener('pointermove', e => { const r = d.getBoundingClientRect(); d.style.setProperty('--x', e.clientX - r.left + 'px'); d.style.setProperty('--y', e.clientY - r.top + 'px') }));
+
+        /* gallery lightbox */
+        const galleryDialog = $('.gallery-dialog'), galleryButtons = $$('.gallery-item');
+        const galleryImage = $('.gallery-dialog img'), galleryCaption = $('.gallery-dialog figcaption');
+        let galleryIndex = 0;
+        function showGalleryPhoto(index) {
+            galleryIndex = (index + galleryButtons.length) % galleryButtons.length;
+            const photo = galleryButtons[galleryIndex];
+            galleryImage.src = photo.dataset.full;
+            galleryImage.alt = photo.querySelector('img').alt;
+            galleryCaption.textContent = photo.dataset.caption;
+        }
+        galleryButtons.forEach((button, index) => button.addEventListener('click', () => {
+            showGalleryPhoto(index);
+            galleryDialog.showModal();
+        }));
+        $('.gallery-close').addEventListener('click', () => galleryDialog.close());
+        $('.gallery-prev').addEventListener('click', () => showGalleryPhoto(galleryIndex - 1));
+        $('.gallery-next').addEventListener('click', () => showGalleryPhoto(galleryIndex + 1));
+        galleryDialog.addEventListener('click', e => {
+            if (e.target === galleryDialog) galleryDialog.close();
+        });
+        galleryDialog.addEventListener('keydown', e => {
+            if (e.key === 'Escape') galleryDialog.close();
+            if (e.key === 'ArrowLeft') showGalleryPhoto(galleryIndex - 1);
+            if (e.key === 'ArrowRight') showGalleryPhoto(galleryIndex + 1);
+        });
 
         /* magnetic buttons + cursor ring */
         if (FINE && !RM) {
